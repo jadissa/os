@@ -67,28 +67,28 @@ defaults write com.apple.finder "labelOnBottom" -int 0
 defaults write com.apple.finder "textSize" -int 12
 
 # Show hidden files
-defaults write com.apple.finder "AppleShowAllFiles" -bool true && killall Finder
+defaults write com.apple.finder "AppleShowAllFiles" -bool true
 
 # Show all filename extensions
 defaults write NSGlobalDomain "AppleShowAllExtensions" -bool true
 
 # Disable the warning when changing a file extension
-defaults write com.apple.finder "FXEnableExtensionChangeWarning" -bool false && killall Finder
+defaults write com.apple.finder "FXEnableExtensionChangeWarning" -bool false
 
 # Put the Dock on the left of the screen
 defaults write com.apple.dock "orientation" -string "left" && killall Dock
 
 # Finder List view
-defaults write com.apple.finder "FXPreferredViewStyle" -string "Nlsv" && killall Finder
+defaults write com.apple.finder "FXPreferredViewStyle" -string "Nlsv"
 
 # Show hard disks on desktop
-defaults write com.apple.finder "ShowHardDrivesOnDesktop" -bool true && killall Finder
+defaults write com.apple.finder "ShowHardDrivesOnDesktop" -bool true
 
 # Show external disks on desktop
-defaults write com.apple.finder "ShowExternalHardDrivesOnDesktop" -bool true && killall Finder
+defaults write com.apple.finder "ShowExternalHardDrivesOnDesktop" -bool true
 
 # Show connected servers on desktop
-defaults write com.apple.finder "ShowMountedServersOnDesktop" -bool true && killall Finder
+defaults write com.apple.finder "ShowMountedServersOnDesktop" -bool true
 
 # Set TextEdit format to text
 defaults write com.apple.TextEdit "RichText" -bool "false" && killall TextEdit
@@ -118,18 +118,21 @@ sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resourc
 sudo defaults write /Library/Preferences/com.apple.loginwindow "LoginwindowText" "Gondor is watching"
 
 # Show full path in finder title
-defaults write com.apple.finder "ShowPathbar" -bool true && killall Finder
-defaults write com.apple.finder "_FXShowPosixPathInTitle" -bool true && killall Finder
+defaults write com.apple.finder "ShowPathbar" -bool true
+defaults write com.apple.finder "_FXShowPosixPathInTitle" -bool true
 
 # Show finder status bar
-defaults write com.apple.finder "ShowStatusBar" -bool true && killall Finder
+defaults write com.apple.finder "ShowStatusBar" -bool true
 
 # Screensaver immediate lock
 defaults write com.apple.screensaver "askForPassword" -int 1
 defaults write com.apple.screensaver "askForPasswordDelay" -int 0
 
-# turn off idiotic doc bounce
+# Turn off idiotic doc bounce
 defaults write com.apple.doc no-bouncing -int 0
+
+# Restart
+killall Finder
 
 # Generate system performance report
 sudo sysdiagnose -f ~/Desktop/
