@@ -60,6 +60,9 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
 # Disable Login for Hidden User ">Console"
 defaults write com.apple.loginwindow "DisableConsoleAccess" -bool true
 
+# Disable drag windows to menu bar to fill screen
+defaults write com.apple.WindowManager "EnableTopTilingByEdgeDrag" -int 0
+
 # Desktop icon size
 defaults write com.apple.finder "gridSpacing" -int 34
 defaults write com.apple.finder "iconSize" -int 36
