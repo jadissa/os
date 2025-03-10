@@ -8,9 +8,11 @@ open ~/Library/Application\ support
 open ~/Library/Containers
 open /Library/Application\ support
 open /Library/Containers
+open /Library/LaunchAgents
+open /Library/LaunchDaemons
 for d in $(tmutil listlocalsnapshotdates | grep "-"); do tmutil deletelocalsnapshots $d; done
-while [[ `brew list | wc -l` -ne 0 ]]; do
-    for EACH in `brew list`; do
-        brew uninstall --force --ignore-dependencies $EACH
-    done
-done
+#while [[ `brew list | wc -l` -ne 0 ]]; do
+#    for EACH in `brew list`; do
+#        brew uninstall --force --ignore-dependencies $EACH
+#    done
+#done
