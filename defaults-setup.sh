@@ -132,7 +132,7 @@ defaults write com.apple.screensaver "askForPassword" -int 1
 defaults write com.apple.screensaver "askForPasswordDelay" -int 0
 
 # Turn off idiotic doc bounce
-defaults write com.apple.doc no-bouncing -int 0
+defaults write com.apple.doc no-bouncing -bool true
 
 # Restart
 killall Finder
