@@ -40,7 +40,7 @@ zsh_config(){
 		echo 'echo "${IPink}________                              .____                    .___"' >>$ZSHRC
 		echo "echo '\______ \_______  ____ _____    _____ |    |    ____  __ __  __| _/'" >>$ZSHRC
 		echo "echo ' |    |  \_  __ _/ __ .\__  \  /     \|    |   /  _ \|  |  \/ __ | '" >>$ZSHRC
-		echo 'echo "${IPurple} |    .   |  | .\  ___/ / __ \|  Y Y  |    |__(  <_> |  |  / /_/ | "' >>$ZSHRC
+		echo 'echo "${IPurple} |    .   |  | .\  ___/ / __ \|  Y Y  |    |__(   O  |  |  / /_/ | "' >>$ZSHRC
 		echo "echo '/_______  |__|   \___  (____  |__|_|  |_______ \____/|____/\____ | '" >>$ZSHRC
 		echo 'echo "        \/           \/     \/      \/        \/                \/ ${Color_Off}"' >>$ZSHRC
 		source $ZSHRC > /dev/null 2>&1 &
