@@ -16,3 +16,4 @@ for d in $(tmutil listlocalsnapshotdates | grep "-"); do tmutil deletelocalsnaps
 #        brew uninstall --force --ignore-dependencies $EACH
 #    done
 #done
+brew cleanup
