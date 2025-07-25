@@ -7,14 +7,17 @@ if [ -n "$INSTALLED" ]; then
 else
 	echo 'Installing...'
 	brew install imagemagick
+	brew install ffmpeg
 fi;
 # Check succcess of last command
 if [[ $?==0 ]]; then
-	echo 'Running mogrify on ~/Downloads/*.webp...'
-	magick mogrify -format gif ~/Downloads/*.webp
+	echo "Running mogrify on $1*.webp..."
+	magick mogrify -format gif $1*.webp
 fi;
 # Check succcess of last command
 if [[ $?==0 ]]; then
-	echo 'Removing ~/Downloads/*.webp files...'
-	rm -f ~/Downloads/*.webp
+	echo "Removing $1*.webp files..."
+	rm -f $1*.webp
 fi;
+
+mogrify -strip $1*
