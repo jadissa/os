@@ -10,5 +10,8 @@ chmod a+rx ~/.local/bin/yt-dlp  # Make executable
 # Download playlist
 ./yt-dlp https://music.youtube.com/playlist?list=PLOfTY28w1MFkfSrWF3WjdIe5Igk4wMEqm
 
+# Move playlist
+mv *.mp4 /Volumes/LaCie/mus
+
 # List playlist
-ls -ltrah ~/.local/bin
+ls -ltrah /Volumes/LaCie/mus
