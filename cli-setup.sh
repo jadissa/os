@@ -24,10 +24,13 @@ zsh_config(){
 		echo 'ZSH_THEME="candy"' >>$ZSHRC
 		echo 'DISABLE_AUTO_TITLE="true"' >>$ZSHRC
 		echo 'HIST_STAMPS=yyyy-mm-dd' >>$ZSHRC
+		echo 'export PAGER="cat"' >>$ZSHRC
+		echo 'export MANPAGER="cat"' >>$ZSHRC
 		echo 'plugins=(git)' >>$ZSHRC
 		echo 'export PATH="/usr/local/opt/php@8.0/bin:$PATH"' >>$ZSHRC
 		echo 'source $ZSH/oh-my-zsh.sh' >>$ZSHRC
 		echo 'source ~/.bash_profile' >>$ZSHRC
+		source $ZSHRC > /dev/null 2>&1 &
 
 		touch ~/.hushlogin > /dev/null 2>&1 &
 		source ~/.hushlogin > /dev/null 2>&1 &
