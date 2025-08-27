@@ -1,9 +1,9 @@
 mkdir -p .venvs > /dev/null 
-python3 -m venv .venvs/MyEnv
-.venvs/MyEnv/bin/python -m pip install --upgrade pip
+python3 -m venv .venvs/MyEnv > /dev/null
+.venvs/MyEnv/bin/python -m pip install --upgrade pip > /dev/null
 #.venvs/MyEnv/bin/python -m pip install package_name > /dev/null
-.venvs/MyEnv/bin/python -m pip install scapy maxminddb tabulate
-source .venvs/MyEnv/bin/activate
+.venvs/MyEnv/bin/python -m pip install scapy maxminddb tabulate > /dev/null
+source .venvs/MyEnv/bin/activate > /dev/null
 
 cat <<'EOF'>./traffic_logger.py
 import socket
@@ -23,6 +23,7 @@ def setup_database():
     """Create the requests table if it doesn't exist."""
     with sqlite3.connect(DATABASE_NAME) as conn:
         cursor = conn.cursor()
+        cursor.execute(f"DROP TABLE IF EXISTS requests")
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS requests (
                 server_hostname TEXT,
