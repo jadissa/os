@@ -1,0 +1,4 @@
+.DS_Store
+network/.venvs
+network/*.db
+network/*.py
