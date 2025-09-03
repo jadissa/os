@@ -10,13 +10,13 @@ curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ~/.l
 chmod a+rx ~/.local/bin/yt-dlp  # Make executable
 
 # Update
-./yt-dlp -U
+~/.local/bin/./yt-dlp -U
 
 # Download playlist
-./yt-dlp $1
+~/.local/bin/./yt-dlp $1
 
 # Move playlist
-mv *.mp4 /Volumes/LaCie/mus
+mkdir -p /Volumes/LaCie/mus && mv *.mp4 /Volumes/LaCie/mus
 
 # List playlist
 ls -ltrah /Volumes/LaCie/mus
