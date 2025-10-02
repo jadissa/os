@@ -126,12 +126,12 @@ from tabulate import tabulate
 
 # Database file location
 # IMPORTANT: Change 'traffic_data.db' to your actual database path.
-DB_PATH = 'traffic_data.db'
+DATABASE_NAME = './data/traffic_data.db'
 
 def get_data():
     """Queries the database and returns sorted data."""
     try:
-        with sqlite3.connect(DB_PATH) as conn:
+        with sqlite3.connect(DATABASE_NAME) as conn:
             cursor = conn.cursor()
             # The SQL query sorts by time_connected and then hits, both in descending order.
             query = """
@@ -171,4 +171,6 @@ def main():
 if __name__ == "__main__":
     main()
 EOF
-sudo .venvs/MyEnv/bin/python ./scripts/traffic_logger.py
+
+sudo .venvs/MyEnv/bin/python ./scripts/traffic_logger.py &
+.venvs/MyEnv/bin/python ./scripts/view.py

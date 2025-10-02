@@ -15,6 +15,7 @@ def setup_database():
     """Create the requests table if it doesn't exist."""
     with sqlite3.connect(DATABASE_NAME) as conn:
         cursor = conn.cursor()
+        cursor.execute(f"DROP TABLE IF EXISTS requests")
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS requests (
                 server_hostname TEXT,
