@@ -7,7 +7,7 @@ def get_internet_speed():
     Calculates download and upload internet speeds and returns them as a dictionary.
     """
     try:
-        st = speedtest.Speedtest()
+        st = speedtest.Speedtest(secure=True)
         st.get_best_server()  # Find the best server for testing
         
         download_speed_raw = st.download()  # Bytes per second

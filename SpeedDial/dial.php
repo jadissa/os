@@ -23,16 +23,16 @@ $font = 'brush_script';
 // === Customizable Variables from URL Parameters ===
 // Download Speed
 $acceptable_dl = 100; // Acceptable download speed (High)
-$actual_dl = isset($data['download_speed_mbps']) ? (int)$data['download_speed_mbps'] : 12.04; // Actual download speed
+$actual_dl = isset($data['download_speed_mbps']) ? (int)$data['download_speed_mbps'] : 0; // Actual download speed
 $low_dl = 0; // Low speed is always 0
 
 // Upload Speed
 $acceptable_up = 50; // Acceptable upload speed (High)
-$actual_up = isset($data['upload_speed_mbps']) ? (int)$data['upload_speed_mbps'] : 4.71; // Actual upload speed
+$actual_up = isset($data['upload_speed_mbps']) ? (int)$data['upload_speed_mbps'] : 0; // Actual upload speed
 $low_up = 0; // Low speed is always 0
 
 $acceptable_ping = 50; // Acceptable upload speed (High)
-$actual_ping = isset($data['ping_ms']) ? (int)$data['ping_ms'] : 45.54; // Actual upload speed
+$actual_ping = isset($data['ping_ms']) ? (int)$data['ping_ms'] : 0; // Actual upload speed
 $low_ping = 0;
 
 // === Image Constants ===d
