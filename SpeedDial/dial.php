@@ -1,19 +1,8 @@
 <?php
 // Set the content type header to image/png
 
-$command = escapeshellcmd('/bin/bash speed.sh');
-$output = shell_exec($command);
 $outputFile = 'output.json';
-$fh = fopen($outputFile, 'w');
-$jsonString = false;
-if ($fh) {
-    fwrite($fh, $output);
-    fclose($fh);
-    $jsonString = file_get_contents($outputFile);
-}
-if( !$jsonString ) {
-    die( 'not working' );
-}
+$jsonString = file_get_contents($outputFile);
 $data = json_decode($jsonString, true);
 
 // Define font path (ensure this file exists in the same directory)
