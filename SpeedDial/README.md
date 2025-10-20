@@ -10,3 +10,6 @@ cat speed_dial.log
 
 ## Install image
 Geektool URL should be set to file:///your/path/to/SpeedDial/dial.png
+
+## Issues
+https://downdetector.com/status/speedtest/
