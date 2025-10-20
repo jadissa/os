@@ -16,3 +16,8 @@ Geektool URL should be set to file:///your/path/to/SpeedDial/dial.png
 
 ## Issues
 https://downdetector.com/status/speedtest/
+
+## Screenshots
+<p float="left">
+  <img src="yikes.png" width="400" />
+</p>
