@@ -1,5 +1,8 @@
 ## Install package
-`/bin/bash install.sh`
+```
+cd /your/path/to/SpeedDial/
+/bin/bash install.sh
+```
 
 ## Make cron
 ```
