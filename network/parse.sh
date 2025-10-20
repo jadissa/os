@@ -2,7 +2,7 @@ mkdir -p .venvs
 python3 -m venv .venvs/MyEnv
 .venvs/MyEnv/bin/python -m pip install --upgrade pip
 #.venvs/MyEnv/bin/python -m pip install package_name > /dev/null
-.venvs/MyEnv/bin/python -m pip install scapy maxminddb tabulate python-whois
+.venvs/MyEnv/bin/python -m pip install python-whois
 source .venvs/MyEnv/bin/activate
 
 cat <<'EOF'>./scripts/whodis.py
