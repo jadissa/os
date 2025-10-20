@@ -1,9 +1,11 @@
-mkdir -p .venvs > /dev/null 
-python3 -m venv .venvs/MyEnv > /dev/null
-.venvs/MyEnv/bin/python -m pip install --upgrade pip > /dev/null
+# Ask for the administrator password upfront
+sudo -v
+mkdir -p .venvs
+python3 -m venv .venvs/MyEnv
+.venvs/MyEnv/bin/python -m pip install --upgrade pip
 #.venvs/MyEnv/bin/python -m pip install package_name > /dev/null
-.venvs/MyEnv/bin/python -m pip install scapy maxminddb tabulate > /dev/null
-source .venvs/MyEnv/bin/activate > /dev/null
+.venvs/MyEnv/bin/python -m pip install scapy maxminddb tabulate
+source .venvs/MyEnv/bin/activate
 
 cat <<'EOF'>./scripts/traffic_logger.py
 import socket
@@ -35,6 +37,7 @@ def setup_database():
                 date INTEGER
             );
         ''')
+        print('setup db done')
         conn.commit()
 
 @lru_cache(maxsize=128)
@@ -172,5 +175,4 @@ if __name__ == "__main__":
     main()
 EOF
 
-sudo .venvs/MyEnv/bin/python ./scripts/traffic_logger.py &
-.venvs/MyEnv/bin/python ./scripts/view.py
+sudo .venvs/MyEnv/bin/python ./scripts/traffic_logger.py & .venvs/MyEnv/bin/python ./scripts/view.py

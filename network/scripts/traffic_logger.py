@@ -27,6 +27,7 @@ def setup_database():
                 date INTEGER
             );
         ''')
+        print('setup db done')
         conn.commit()
 
 @lru_cache(maxsize=128)
