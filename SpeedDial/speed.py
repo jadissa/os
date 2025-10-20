@@ -31,3 +31,8 @@ if __name__ == "__main__":
     speed_results = get_internet_speed()
     json_output = json.dumps(speed_results, indent=4)
     print(json_output)
+
+    with open("output.json", "w") as f:
+        f.write(json_output)
+    
+    print("\nSpeed results have been saved to output.json")
