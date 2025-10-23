@@ -1,4 +1,3 @@
 .venvs
-.py
 traffic_data.db
 __pycache__

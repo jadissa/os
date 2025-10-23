@@ -1,11 +1,17 @@
-## Log
+## Install
 ```
-/bin/bash run.sh
+cd /your/folder/network/
+/bin/bash install.sh
 ```
 
-## Who
+## Log
 ```
-/bin/bash parse.sh
+/bin/bash log.sh
+```
+
+## Analyze
+```
+/bin/bash analyze.sh
 ```
 
 ## Thoughts
