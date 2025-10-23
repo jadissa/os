@@ -27,7 +27,7 @@ zsh_config(){
 		echo 'export PAGER="cat"' >>$ZSHRC
 		echo 'export MANPAGER="cat"' >>$ZSHRC
 		echo 'plugins=(git)' >>$ZSHRC
-		echo 'export PATH="/usr/local/opt/php@8.0/bin:$PATH"' >>$ZSHRC
+		echo 'export PATH="/usr/local/opt/php@*/bin:$PATH"' >>$ZSHRC
 		echo 'source $ZSH/oh-my-zsh.sh' >>$ZSHRC
 		echo 'source ~/.bash_profile' >>$ZSHRC
 		source $ZSHRC > /dev/null 2>&1 &
