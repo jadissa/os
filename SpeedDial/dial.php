@@ -25,7 +25,7 @@ $actual_ping = isset($data['ping_ms']) ? (int)$data['ping_ms'] : 0; // Actual up
 $low_ping = 0;
 
 // === Image Constants ===d
-$image_width = 490;
+$image_width = 500;
 $image_height = 150;
 $dial_radius = 50;
 $center_y = 100;
@@ -47,12 +47,13 @@ $white = imagecolorallocate($image, 255, 255, 255);
 
 // === Draw the dials and text ===
 drawDial($image, 80, $center_y, $dial_radius, 'Down', $white, $font, $acceptable_dl, $low_dl, $actual_dl, $font_size_label, $font_size_numbers, 'MBPS');
-drawDial($image, 240, $center_y, $dial_radius, 'Up', $white, $font, $acceptable_up, $low_up, $actual_up, $font_size_label, $font_size_numbers, 'MBPS');
-drawDial($image, 400, $center_y, $dial_radius, 'Ping', $white, $font, $acceptable_ping, $low_ping, $actual_ping, $font_size_label, $font_size_numbers, 'Milli');
+drawDial($image, 240 + 20, $center_y, $dial_radius, 'Up', $white, $font, $acceptable_up, $low_up, $actual_up, $font_size_label, $font_size_numbers, 'MBPS');
+drawDial($image, 400 + 20, $center_y, $dial_radius, 'Ping', $white, $font, $acceptable_ping, $low_ping, $actual_ping, $font_size_label, $font_size_numbers, 'Milli');
 
 // === Output the final image ===
 imagepng($image,'dial.png');
 imagedestroy($image);
+print 'Image saved to dial.png';
 
 // === Helper function to draw a single dial ===
 function drawDial($image, $center_x, $center_y, $radius, $label, $color, $font, $high_val, $low_val, $actual_val, $font_size_label, $font_size_numbers, $measurement='mbps') {
@@ -62,7 +63,7 @@ function drawDial($image, $center_x, $center_y, $radius, $label, $color, $font, 
     // Draw the top label
     $label_bbox = imagettfbbox($font_size_label, 0, $font, $label);
     $label_width = $label_bbox[2] - $label_bbox[0];
-    imagettftext($image, $font_size_label, 0, $center_x - $label_width / 2, $center_y - $radius - 10, $color, $font, $label);
+    @imagettftext($image, $font_size_label, 0, $center_x - $label_width / 2, $center_y - $radius - 10, $color, $font, $label);
 
     // Calculate angle for the pointer
     $max_val = max($high_val, $actual_val);
@@ -89,5 +90,5 @@ function drawDial($image, $center_x, $center_y, $radius, $label, $color, $font, 
     $speed_text = $actual_val . " $measurement";
     $speed_bbox = imagettfbbox($font_size_numbers, 0, $font, $speed_text);
     $speed_width = $speed_bbox[2] - $speed_bbox[0];
-    imagettftext($image, $font_size_numbers, 0, $center_x - $speed_width / 2, $center_y + 20, $color, $font, $speed_text);
+    @imagettftext($image, $font_size_numbers, 0, $center_x - $speed_width / 2, $center_y + 20, $color, $font, $speed_text);
 }
