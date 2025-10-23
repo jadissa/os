@@ -5,7 +5,7 @@ if [[ -z "$1" ]]; then
 	exit
 fi
 
-sh ~/Server/os/brew-update.sh
+sh ~/Server/os/brew/brew-update.sh
 brew install ffmpeg imagemagick
 
 # convert is part of imagemagick and translates the image to gif
