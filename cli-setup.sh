@@ -19,9 +19,16 @@ zsh_config(){
 	if [[ -x "$(command -v zsh)" ]]; then
 		ZSH=$(zsh_path)
 		ZSHRC=~/.zshrc
+
+		echo 'PROMPT=$'\''%{$fg_bold[magenta]%}%n@%m %{$fg[white]%}%D{[%X]} %{$reset_color%}%{$fg[blue]%}[%~]%{$reset_color%} $(git_prompt_info)%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} '\''' >$ZSH/themes/jcandy.zsh-theme
+		echo 'ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}["' >>$ZSH/themes/jcandy.zsh-theme
+		echo 'ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"' >>$ZSH/themes/jcandy.zsh-theme
+		echo 'ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}*%{$fg[green]%}"' >>$ZSH/themes/jcandy.zsh-theme
+		echo 'ZSH_THEME_GIT_PROMPT_CLEAN=""' >>$ZSH/themes/jcandy.zsh-theme
+
 		echo 'ZSH=~/.oh-my-zsh' >$ZSHRC
 		echo 'export ZSH="$ZSH"' >>$ZSHRC
-		echo 'ZSH_THEME="candy"' >>$ZSHRC
+		echo 'ZSH_THEME="jcandy"' >>$ZSHRC
 		echo 'DISABLE_AUTO_TITLE="true"' >>$ZSHRC
 		echo 'HIST_STAMPS=yyyy-mm-dd' >>$ZSHRC
 		echo 'export PAGER="cat"' >>$ZSHRC
