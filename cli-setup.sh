@@ -20,8 +20,7 @@ zsh_config(){
 		ZSH=$(zsh_path)
 		ZSHRC=~/.zshrc
 
-		echo 'PROMPT=$'\''%{$fg_bold[magenta]%}%n@%m %{$fg[white]%}%D{[%X]} %{$reset_color%}%{$fg[blue]%}[%~]%{$reset_color%} $(git_prompt_info)\' >$ZSH/themes/jcandy.zsh-theme
-		echo '%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} '\''' >>$ZSH/themes/jcandy.zsh-theme
+		echo 'PROMPT=$'\''%{$fg_bold[magenta]%}%n@%m %{$fg[white]%}%D{[%X]} %{$reset_color%}%{$fg[blue]%}[%~]%{$reset_color%} $(git_prompt_info)%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} '\''' >$ZSH/themes/jcandy.zsh-theme
 		echo 'ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}["' >>$ZSH/themes/jcandy.zsh-theme
 		echo 'ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"' >>$ZSH/themes/jcandy.zsh-theme
 		echo 'ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}*%{$fg[green]%}"' >>$ZSH/themes/jcandy.zsh-theme
