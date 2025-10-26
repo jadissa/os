@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 import speedtest
 import json
+import time
+import datetime
 
 def get_internet_speed():
     """
@@ -21,11 +23,12 @@ def get_internet_speed():
         speed_data = {
             "download_speed_mbps": round(download_speed_mbps, 2),
             "upload_speed_mbps": round(upload_speed_mbps, 2),
-            "ping_ms": round(ping, 2)
+            "ping_ms": round(ping, 2),
+            "time_stamp": time.time(),
         }
         return speed_data
     except speedtest.SpeedtestException as e:
-        return {"error": str(e)}
+        return {"error": str(e),"time_stamp": time.time()}
 
 if __name__ == "__main__":
     speed_results = get_internet_speed()
