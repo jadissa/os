@@ -19,12 +19,29 @@ zsh_config(){
 	if [[ -x "$(command -v zsh)" ]]; then
 		ZSH=$(zsh_path)
 		ZSHRC=~/.zshrc
+		LPURPLE=135
+		PURPLE=057
+		LPINK=219
+		PINK=005
+		LWHITE=244
+		WHITE=240
+		# for i in {0..255}; do print -Pn "%K{$i} %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$\'\n\'}; done
 
-		echo 'PROMPT=$'\''%{$fg_bold[magenta]%}%n@%m %{$fg[white]%}%D{[%X]} %{$reset_color%}%{$fg[blue]%}[%~]%{$reset_color%} $(git_prompt_info)%{$fg[blue]%}->%{$fg_bold[blue]%} %#%{$reset_color%} '\''' >$ZSH/themes/jcandy.zsh-theme
+		echo '' >$ZSH/themes/jcandy.zsh-theme
+		echo "LPURPLE=$LPURPLE" >>$ZSH/themes/jcandy.zsh-theme
+		echo "PURPLE=$PURPLE" >>$ZSH/themes/jcandy.zsh-theme
+		echo "LPINK=$LPINK" >>$ZSH/themes/jcandy.zsh-theme
+		echo "PINK=$PINK" >>$ZSH/themes/jcandy.zsh-theme
+		echo "LWHITE=$LWHITE" >>$ZSH/themes/jcandy.zsh-theme
+		echo "WHITE=$WHITE" >>$ZSH/themes/jcandy.zsh-theme
+
+		echo 'PROMPT=$'\''%F{$LPINK}%n%f%F{$PINK}@%m%f %F{$WHITE}12 %F{$LWHITE}%D{[%X]}%f %F{$WHITE}24%f %F{$LWHITE}[%D{%H:%M:%S}]%f %F{$WHITE}UNIX%f %F{$LWHITE}[%D{%s}]%f %F{$LPURPLE}[%~]%f$(git_prompt_info)%f%F{$PURPLE}->%f%F{$PURPLE}%#%f '\''' >>$ZSH/themes/jcandy.zsh-theme
 		echo 'ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}["' >>$ZSH/themes/jcandy.zsh-theme
 		echo 'ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"' >>$ZSH/themes/jcandy.zsh-theme
 		echo 'ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}*%{$fg[green]%}"' >>$ZSH/themes/jcandy.zsh-theme
 		echo 'ZSH_THEME_GIT_PROMPT_CLEAN=""' >>$ZSH/themes/jcandy.zsh-theme
+		# color format %F{color}%f, where %f resets the color back to nothing. %F is foreground
+		# https://zsh-prompt-generator.site/
 
 		echo 'ZSH=~/.oh-my-zsh' >$ZSHRC
 		echo 'export ZSH="$ZSH"' >>$ZSHRC
@@ -43,16 +60,22 @@ zsh_config(){
 		source ~/.hushlogin > /dev/null 2>&1 &
 
 		ZSHRC=~/.zprofile
-		echo '# \033 is escape code. [38 is foreground. 5 changes color. 099 is the color'>$ZSHRC
-		echo "Color_Off='\033[0m'       # Text Reset" >>$ZSHRC
-		echo "IPurple='\033[38;5;099m'  # Purple" >>$ZSHRC
-		echo "IPink='\033[38;5;129m'    # Pink" >>$ZSHRC
-		echo 'echo "${IPink}________                              .____                    .___"' >>$ZSHRC
-		echo "echo '\______ \_______  ____ _____    _____ |    |    ____  __ __  __| _/'" >>$ZSHRC
-		echo "echo ' |    |  \_  __ _/ __ .\__  \  /     \|    |   /  _ \|  |  \/ __ | '" >>$ZSHRC
-		echo 'echo "${IPurple} |    .   |  | .\  ___/ / __ \|  Y Y  |    |__(   O  |  |  / /_/ | "' >>$ZSHRC
-		echo "echo '/_______  |__|   \___  (____  |__|_|  |_______ \____/|____/\____ | '" >>$ZSHRC
-		echo 'echo "        \/           \/     \/      \/        \/                \/ ${Color_Off}"' >>$ZSHRC
+		echo '' >$ZSHRC
+		echo "LPURPLE=$LPURPLE" >>$ZSHRC
+		echo "PURPLE=$PURPLE" >>$ZSHRC
+		echo "LPINK=$LPINK" >>$ZSHRC
+		echo "PINK=$PINK" >>$ZSHRC
+		echo "LWHITE=$LWHITE" >>$ZSHRC
+		echo "WHITE=$WHITE" >>$ZSHRC
+
+		echo "print -P '%F{$LPINK}________                              .____                    .___%f'" >>$ZSHRC
+		echo "print -P '%F{$PINK}\\\______ \\\_______  ____ _____    _____ |    |    ____  __ __  __| _/%f'" >>$ZSHRC
+		echo "print -P '%F{$PINK} |    |  \\\_  __ _/ __ .\\\__  \\\  /     \\\|    |   /  _ \\\|  |  \\\/ __ | %f'" >>$ZSHRC
+		echo "print -P '%F{$LPURPLE} |    .   |  | .\\\  ___/ / __ \\\|  Y Y  |    |__(   O  |  |  / /_/ | %f'" >>$ZSHRC
+		echo "print -P '%F{$PURPLE}/_______  |__|   \\\___  (____  |__|_|  |_______ \\\____/|____/\\\____ | %f'" >>$ZSHRC
+		echo "print -P '%F{$PURPLE}        \\\/           \\\/     \\\/      \\\/        \\\/                \\\/ %f'" >>$ZSHRC
+		# https://patorjk.com/software/taag/#p=display&f=Graffiti&t=DreamLoud&x=none&v=3&h=3&w=80&we=false
+		# backslashes are escaped above using \\\ instead of \
 		source $ZSHRC > /dev/null 2>&1 &
 		echo 0
 	else
