@@ -25,6 +25,8 @@ zsh_config(){
 		PINK=005
 		LWHITE=244
 		WHITE=240
+		GREEN=084
+		RED=162
 		# for i in {0..255}; do print -Pn "%K{$i} %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$\'\n\'}; done
 
 		echo '' >$ZSH/themes/jcandy.zsh-theme
@@ -34,11 +36,13 @@ zsh_config(){
 		echo "PINK=$PINK" >>$ZSH/themes/jcandy.zsh-theme
 		echo "LWHITE=$LWHITE" >>$ZSH/themes/jcandy.zsh-theme
 		echo "WHITE=$WHITE" >>$ZSH/themes/jcandy.zsh-theme
+		echo "GREEN=$GREEN" >>$ZSH/themes/jcandy.zsh-theme
+		echo "RED=$RED" >>$ZSH/themes/jcandy.zsh-theme
 
 		echo 'PROMPT=$'\''%F{$LPINK}%n%f%F{$PINK}@%m%f %F{$WHITE}12 %F{$LWHITE}%D{[%X]}%f %F{$WHITE}24%f %F{$LWHITE}[%D{%H:%M:%S}]%f %F{$WHITE}UNIX%f %F{$LWHITE}[%D{%s}]%f %F{$LPURPLE}[%~]%f$(git_prompt_info)%f%F{$PURPLE}->%f%F{$PURPLE}%#%f '\''' >>$ZSH/themes/jcandy.zsh-theme
-		echo 'ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}["' >>$ZSH/themes/jcandy.zsh-theme
-		echo 'ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"' >>$ZSH/themes/jcandy.zsh-theme
-		echo 'ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}*%{$fg[green]%}"' >>$ZSH/themes/jcandy.zsh-theme
+		echo 'ZSH_THEME_GIT_PROMPT_PREFIX="%F{$GREEN}["' >>$ZSH/themes/jcandy.zsh-theme
+		echo 'ZSH_THEME_GIT_PROMPT_SUFFIX="]%f"' >>$ZSH/themes/jcandy.zsh-theme
+		echo 'ZSH_THEME_GIT_PROMPT_DIRTY=" %F{$RED}*%F{$GREEN}"' >>$ZSH/themes/jcandy.zsh-theme
 		echo 'ZSH_THEME_GIT_PROMPT_CLEAN=""' >>$ZSH/themes/jcandy.zsh-theme
 		# color format %F{color}%f, where %f resets the color back to nothing. %F is foreground
 		# https://zsh-prompt-generator.site/
