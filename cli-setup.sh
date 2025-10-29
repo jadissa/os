@@ -59,7 +59,7 @@ zsh_config(){
 		echo 'ZSH_THEME_GIT_PROMPT_SUFFIX="]%f"' >>$ZSH/themes/jcandy.zsh-theme
 		echo 'ZSH_THEME_GIT_PROMPT_DIRTY=" %F{$RED}*%F{$GREEN}"' >>$ZSH/themes/jcandy.zsh-theme
 		echo 'ZSH_THEME_GIT_PROMPT_CLEAN=""' >>$ZSH/themes/jcandy.zsh-theme
-		source $ZSH/themes/jcandy.zsh-theme
+		source $ZSH/themes/jcandy.zsh-theme > /dev/null 2>&1 &
 		# color format %F{color}%f, where %f resets the color back to nothing. %F is foreground
 		# https://zsh-prompt-generator.site/
 
