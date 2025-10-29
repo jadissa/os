@@ -15,6 +15,21 @@ zsh_install(){
 	echo 0
 }
 
+composer_install(){
+	if [[ ! -x "$(command -v php)" ]]; then
+		echo 1
+	else
+		if [[ ! -x "$(command -v composer)" ]]; then
+			php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+			php composer-setup.php > /dev/null 2>&1 &
+			wait
+			php -r "unlink('composer-setup.php');"
+			mv composer.phar /usr/local/bin/composer
+		fi
+	fi
+	echo 0
+}
+
 zsh_config(){
 	if [[ -x "$(command -v zsh)" ]]; then
 		ZSH=$(zsh_path)
@@ -44,6 +59,7 @@ zsh_config(){
 		echo 'ZSH_THEME_GIT_PROMPT_SUFFIX="]%f"' >>$ZSH/themes/jcandy.zsh-theme
 		echo 'ZSH_THEME_GIT_PROMPT_DIRTY=" %F{$RED}*%F{$GREEN}"' >>$ZSH/themes/jcandy.zsh-theme
 		echo 'ZSH_THEME_GIT_PROMPT_CLEAN=""' >>$ZSH/themes/jcandy.zsh-theme
+		source $ZSH/themes/jcandy.zsh-theme
 		# color format %F{color}%f, where %f resets the color back to nothing. %F is foreground
 		# https://zsh-prompt-generator.site/
 
@@ -85,21 +101,6 @@ zsh_config(){
 	else
 		echo 1
 	fi
-}
-
-composer_install(){
-	if [[ ! -x "$(command -v php)" ]]; then
-		echo 1
-	else
-		if [[ ! -x "$(command -v composer)" ]]; then
-			php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-			php composer-setup.php > /dev/null 2>&1 &
-			wait
-			php -r "unlink('composer-setup.php');"
-			mv composer.phar /usr/local/bin/composer
-		fi
-	fi
-	echo 0
 }
 
 #vim_install(){}
@@ -213,9 +214,9 @@ main()(
 	CONFIG=no
 	while (( $# > 0 )); do
 		case $1 in
-		--verbose)		VERBOSE=yes; SOMETHING=no ;;
 		--install)		INSTALL=yes;;
 		--configure)	CONFIG=yes;;
+		--verbose)		VERBOSE=yes; SOMETHING=no ;;
 		esac
 		shift
 	done
