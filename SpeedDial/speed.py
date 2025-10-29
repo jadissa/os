@@ -2,7 +2,7 @@
 import speedtest
 import json
 import time
-import datetime
+import sys # Import the sys module
 
 def get_internet_speed():
     """
@@ -28,10 +28,19 @@ def get_internet_speed():
         }
         return speed_data
     except speedtest.SpeedtestException as e:
-        return {"error": str(e),"time_stamp": time.time()}
+        # Return a dictionary with an error key on failure
+        return {"error": str(e), "time_stamp": time.time()}
 
 if __name__ == "__main__":
     speed_results = get_internet_speed()
+    
+    # Check if 'download_speed_mbps' is missing or the result has an 'error' key
+    if "download_speed_mbps" not in speed_results:
+        print("An error occurred or the speed key is empty. Exiting.")
+        json_output = json.dumps(speed_results, indent=4)
+        print(json_output)
+        sys.exit(1) # Exit with a non-zero status to indicate an error
+    
     json_output = json.dumps(speed_results, indent=4)
     print(json_output)
 
