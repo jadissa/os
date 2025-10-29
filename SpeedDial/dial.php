@@ -30,6 +30,7 @@ $image_height = 150;
 $dial_radius = 50;
 $center_y = 100;
 $font_size = 28;
+$dial_spacing = 20;
 
 $font_size_label = $font_size;
 $font_size_numbers = $font_size / 2;
@@ -47,8 +48,8 @@ $white = imagecolorallocate($image, 255, 255, 255);
 
 // === Draw the dials and text ===
 drawDial($image, 80, $center_y, $dial_radius, 'Down', $white, $font, $acceptable_dl, $low_dl, $actual_dl, $font_size_label, $font_size_numbers, 'MBPS');
-drawDial($image, 240 + 20, $center_y, $dial_radius, 'Up', $white, $font, $acceptable_up, $low_up, $actual_up, $font_size_label, $font_size_numbers, 'MBPS');
-drawDial($image, 400 + 20, $center_y, $dial_radius, 'Ping', $white, $font, $acceptable_ping, $low_ping, $actual_ping, $font_size_label, $font_size_numbers, 'Milli');
+drawDial($image, 240 + $dial_spacing, $center_y, $dial_radius, 'Up', $white, $font, $acceptable_up, $low_up, $actual_up, $font_size_label, $font_size_numbers, 'MBPS');
+drawDial($image, 400 + $dial_spacing, $center_y, $dial_radius, 'Ping', $white, $font, $acceptable_ping, $low_ping, $actual_ping, $font_size_label, $font_size_numbers, 'Milli');
 
 // === Output the final image ===
 imagepng($image,'dial.png');
@@ -86,7 +87,6 @@ function drawDial($image, $center_x, $center_y, $radius, $label, $color, $font, 
     imagettftext($image, $font_size_numbers, 0, $center_x + $radius + 5, $center_y + 5, $color, $font, $high_val);
 
     // Draw actual speed text
-    $dial_spacing = 35;
     $speed_text = $actual_val . " $measurement";
     $speed_bbox = imagettfbbox($font_size_numbers, 0, $font, $speed_text);
     $speed_width = $speed_bbox[2] - $speed_bbox[0];
