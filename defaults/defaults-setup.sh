@@ -117,8 +117,7 @@ defaults write NSGlobalDomain InitialKeyRepeat -int 25
 sudo systemsetup -settimezone "America/Chicago" > /dev/null
 sudo systemsetup -gettimezone
 
-# Disable Notification Center and remove the menu bar icon
-ls -lstrah /System/Library/LaunchAgents/
+# Disable Notification Center and remove the menu bar 
 launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
 # Disable drag windows to menu bar to fill screen
