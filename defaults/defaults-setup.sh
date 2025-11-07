@@ -46,6 +46,7 @@ sudo /bin/launchctl disable system/com.apple.NetworkSharing
 defaults -currentHost write com.apple.controlcenter.plist AirplayRecieverEnabled -bool false
 
 # Disable remote access
+ps aux | grep remote
 sudo systemsetup -f -setremotelogin off && \
 	sudo systemsetup -getremotelogin && \
 	sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate -configure -access -off && \
@@ -71,17 +72,20 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AutomaticLogin -b
 
 # Disable Screen Sharing (VNC)/ssh/smb
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.screensharing -dict Disabled -bool true
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.screensharing.plist 2> /dev/null
 sudo launchctl disable system/com.apple.screensharing
-sudo launchctl disable system/com.openssh.sshd
-sudo launchctl disable system/com.apple.AppleFileServer
-sudo launchctl disable system/com.apple.smbd
 
-# Disable Apple File Sharing (AFP/SMB)
-echo "Disabling Apple File Sharing (AFP/SMB)..."
+sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.openssh.sshd -dict Disabled -bool true
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.openssh.sshd.plist 2> /dev/null
+sudo launchctl disable system/com.openssh.sshd
+
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.AppleFileServer -dict Disabled -bool true
-sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.AppleFileServer.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.AppleFileServer.plist 2> /dev/null
+sudo launchctl disable system/com.apple.AppleFileServer
+
 sudo defaults write /var/db/launchd.db/com.apple.launchd/overrides.plist com.apple.smbd -dict Disabled -bool true
-sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.smbd.plist
+sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.smbd.plist 2> /dev/null
+sudo launchctl disable system/com.apple.smbd
 
 
 # Disable `gamed` process
