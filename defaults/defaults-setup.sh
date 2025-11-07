@@ -34,7 +34,15 @@ defaults write NSGlobalDomain "InitialKeyRepeat" -int 25
 sudo systemsetup -settimezone "America/Ciudad_Juarez" > /dev/null
 
 # Disable AirPlay and AirDrop
+ps aux | grep sharing
+defaults write com.apple.sharingd DiscoverableMode -string "Off"
 sudo ifconfig awdl0 down
+sudo /bin/launchctl disable system/com.apple.sharingd
+sudo /bin/launchctl stop com.apple.sharingd
+sudo /bin/launchctl stop com.apple.NetworkSharing
+sudo /bin/launchctl disable system/com.apple.NetworkSharing
+sudo killall -HUP sharingd
+defaults -currentHost write com.apple.controlcenter.plist AirplayRecieverEnabled -bool false
 
 # Disable Notification Center and remove the menu bar icon
 launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
@@ -52,6 +60,9 @@ sudo /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
 
 # Enable file valut/encrypt disc contents
 sudo fdesetup enable
+sudo fdesetup status
+sudo fdesetup isactive
+sudo fdesetup list
 
 # Enable stealth mode/don't respond to pings
 defaults read /Library/Preferences/com.apple.alf stealthenabled
@@ -115,7 +126,12 @@ defaults write NSGlobalDomain "NSAutomaticCapitalizationEnabled" -bool false
 sudo defaults write GuestEnabled /Library/Preferences/com.apple.loginwindow -int 0
 
 # Disable remote access
-sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate -configure -access -off
+sudo systemsetup -f -setremotelogin off && \
+	sudo systemsetup -getremotelogin && \
+	sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate -configure -access -off && \
+	sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate && \
+	sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate -stop && \
+	sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -configure -clientopts -setmenuextra -menuextra no
 
 # Login text
 sudo defaults write /Library/Preferences/com.apple.loginwindow "LoginwindowText" "Gondor is watching"

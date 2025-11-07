@@ -42,6 +42,7 @@ zsh_config(){
 		WHITE=240
 		GREEN=084
 		RED=162
+		BG=234
 		# for i in {0..255}; do print -Pn "%K{$i} %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$\'\n\'}; done
 
 		echo '' >$ZSH/themes/jcandy.zsh-theme
