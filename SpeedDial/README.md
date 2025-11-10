@@ -1,26 +1,26 @@
 ## Install package
 ```
-cd /your/path/to/SpeedDial/
-/bin/bash install.sh
+cd /path/to/SpeedDial/
+/path/to/bash install.sh
 ```
 
-## Make cron
-```
-crontab -e 
-0 */2 * * * cd /your/path/to/SpeedDial/ && /bin/bash speed.sh >> speed_dial.log 2>&1 && /bin/php dial.php
-```
+## Enable Dial Generation
+- Drag new 'Shell' Geeklet to your desktop
+- Paste the following line into the Shell Command:
+```cd /path/to/SpeedDial/ && /path/to/bash speed.sh >> speed_dial.log 2>&1 && /path/to/php dial.php```
 
-## Configure image
-Geektool URL should be set to file:///your/path/to/SpeedDial/dial.png
+## Enable Dial Display
+- Drag new 'Image' Geeklet to your desktop
+- Set local path to: /path/to/SpeedDial/dial.png
 
 ## Test
 ```
-cd /your/path/to/SpeedDial/ && /bin/bash speed.sh && /bin/php dial.php
+cd /path/to/SpeedDial/ && /path/to/bash speed.sh && /path/to/php dial.php
 ```
 
 ## Issues
 ```
-cd /your/path/to/SpeedDial/ && tail -f speed_dial.log
+cd /path/to/SpeedDial/ && tail -f speed_dial.log
 ```
 https://downdetector.com/status/speedtest/
 

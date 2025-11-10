@@ -30,6 +30,7 @@ $image_height = 150;
 $dial_radius = 50;
 $center_y = 100;
 $font_size = 28;
+$font_color = '#ffffff';
 $dial_spacing = 20;
 
 $font_size_label = $font_size;
@@ -44,7 +45,8 @@ $trans_colour = imagecolorallocatealpha($image, 0, 0, 0, 127);
 imagefill($image, 0, 0, $trans_colour);
 
 // Allocate colors for the elements
-$white = imagecolorallocate($image, 255, 255, 255);
+$font_color = hexToRgb( $font_color ) ?? [ r => 255, g => 255, b => 255 ];
+$white = imagecolorallocate($image, $font_color['r'], $font_color['g'], $font_color['b']);
 
 // === Draw the dials and text ===
 drawDial($image, 80, $center_y, $dial_radius, 'Down', $white, $font, $acceptable_dl, $low_dl, $actual_dl, $font_size_label, $font_size_numbers, 'MBPS');
@@ -55,6 +57,30 @@ drawDial($image, 400 + $dial_spacing, $center_y, $dial_radius, 'Ping', $white, $
 imagepng($image,'dial.png');
 imagedestroy($image);
 print 'Image saved to dial.png';
+
+function hexToRgb($hexColor) {
+    // Remove '#' if present
+    $hexColor = ltrim($hexColor, '#');
+
+    // Handle 3-character shorthand hex codes (e.g., #F00 becomes #FF0000)
+    if (strlen($hexColor) == 3) {
+        $r = hexdec(substr($hexColor, 0, 1) . substr($hexColor, 0, 1));
+        $g = hexdec(substr($hexColor, 1, 1) . substr($hexColor, 1, 1));
+        $b = hexdec(substr($hexColor, 2, 1) . substr($hexColor, 2, 1));
+    } 
+    // Handle 6-character hex codes (e.g., #FF0000)
+    elseif (strlen($hexColor) == 6) {
+        $r = hexdec(substr($hexColor, 0, 2));
+        $g = hexdec(substr($hexColor, 2, 2));
+        $b = hexdec(substr($hexColor, 4, 2));
+    } 
+    // Return false or handle invalid input
+    else {
+        return false; 
+    }
+
+    return ['r' => $r, 'g' => $g, 'b' => $b];
+}
 
 // === Helper function to draw a single dial ===
 function drawDial($image, $center_x, $center_y, $radius, $label, $color, $font, $high_val, $low_val, $actual_val, $font_size_label, $font_size_numbers, $measurement='mbps') {
