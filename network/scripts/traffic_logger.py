@@ -59,11 +59,14 @@ def insert_request(ip_address, server_hostname, location, process, origin, whois
         cursor.execute("SELECT ip_address from requests where ip_address=?", (ip_address,))
         data = cursor.fetchall()
         if not data:
-            cursor.execute('''
-                INSERT INTO requests (ip_address, server_hostname, location, process, origin, whois, created_at, updated_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (ip_address, server_hostname, location, process, origin, whois, date_time, date_time))
-            conn.commit()
+            cursor.execute("SELECT whois from requests where whois=? AND whois != 'Unknown'", (whois,))
+            data = cursor.fetchall()
+            if not data:
+                cursor.execute('''
+                    INSERT INTO requests (ip_address, server_hostname, location, process, origin, whois, created_at, updated_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ''', (ip_address, server_hostname, location, process, origin, whois, date_time, date_time))
+                conn.commit()
 
 def get_process_for_remote_ip(target_ip: str) -> str:
     """
