@@ -5,15 +5,9 @@ cd /your/folder/network/
 ```
 
 ## Log
-```
-/bin/bash log.sh
-```
+`/bin/bash log.sh`
 
 ## Analyze
-```
-/bin/bash analyze.sh
-```
+Check out https://github.com/jadissa/Network, which has a reasonable display
 
-## Thoughts
-would be ideal to have the system prompt to whitelist entries as they come in based on whois record info. if the record has been whitelisted by the user, it has been seen and checked. 
-then we could display only those results which have not been seen/checked
+`/bin/bash analyze.sh`
