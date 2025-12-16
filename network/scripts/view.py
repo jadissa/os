@@ -5,7 +5,7 @@ from tabulate import tabulate
 
 # Database file location
 # IMPORTANT: Change 'traffic_data.db' to your actual database path.
-DATABASE_NAME = './data/traffic_data.db'
+DATABASE_NAME = './data/database.sqlite'
 
 def get_data():
     """Queries the database and returns sorted data."""
@@ -14,9 +14,9 @@ def get_data():
             cursor = conn.cursor()
             # The SQL query sorts by time_connected and then hits, both in descending order.
             query = """
-            SELECT ip_address, origin, location, hits, time_connected, date
+            SELECT ip_address, server_hostname, origin, location, whois, process, created_at, updated_at, reviewed 
             FROM requests
-            ORDER BY time_connected DESC, hits DESC;
+            ORDER BY updated_at ASC;
             """
             cursor.execute(query)
             return cursor.fetchall()
@@ -36,16 +36,13 @@ def display_data(data):
         return
 
     headers = [
-        "ip_address", "origin", "location", "hits", "time_connected", "date"
+        "ip_address", "server_hostname", "origin", "location", "whois", "process", "created_at", "updated_at", "reviewed"
     ]
     print(tabulate(data, headers=headers, tablefmt="grid"))
 
 def main():
-    """Main function to query and display data every 10 seconds."""
-    while True:
-        results = get_data()
-        display_data(results)
-        time.sleep(10)
+    results = get_data()
+    display_data(results)
 
 if __name__ == "__main__":
     main()

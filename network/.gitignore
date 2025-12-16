@@ -1,4 +1,5 @@
 .venvs
 data/traffic_data.db
+data/database.sqlite
 __pycache__*.sqlite
 __pycache__
