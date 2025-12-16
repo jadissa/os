@@ -176,7 +176,9 @@ process() {
 	)
 	if [[ $1 == 'installs' ]]; then
 		for install in ${INSTALLS[@]}; do
-			echo "Installing ${install}...";
+			if [[ $VERBOSE == 'yes' ]]; then
+				echo "Installing ${install}...";
+			fi
 			if (( $("${install}_install") > 0 )) ; then
 				if [[ $VERBOSE == 'yes' ]]; then
 					echo 'Failed'
