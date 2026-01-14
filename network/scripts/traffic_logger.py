@@ -12,6 +12,7 @@ from scapy.all import sniff
 from scapy.all import IP, IPv6
 from functools import lru_cache
 from ipwhois import IPWhois
+import whois
 
 # Database setup
 RAW_DB = './data/database.sqlite'
@@ -111,6 +112,10 @@ def process_packet(packet, geo_reader):
         # Invalid IP address string, ignore
         return
 
+    print("\nProcessing packet.................................................")
+    print(f"\nIP Address:      {source_ip}")
+    print(f"\nProcess:         {process}")
+
     # Filter standard local/multicast network traffic out using built-in methods
     if source_ip.is_loopback or source_ip.is_private or source_ip.is_multicast or source_ip.is_link_local:
         return
@@ -123,6 +128,7 @@ def process_packet(packet, geo_reader):
         network_prefix = 64
         
     source_network = ipaddress.ip_network(f"{source_ip_str}/{network_prefix}", strict=False)
+    print(f"\nSource Network:  {source_ip}")
 
     # Check if this network has already been processed
     if source_network in processed_networks:
@@ -133,7 +139,7 @@ def process_packet(packet, geo_reader):
     # This is more robust than simple membership check.
     for existing_network in processed_networks:
         if source_network.subnet_of(existing_network) or existing_network.subnet_of(source_network) or source_network.overlaps(existing_network):
-            #print(f"Network {source_network} overlaps with existing network {existing_network}. Skipping insertion.")
+            print(f"Network {source_network} overlaps with existing network {existing_network}. Skipping insertion.")
             return
 
     # If the network is new, add it to the processed set
@@ -146,6 +152,10 @@ def process_packet(packet, geo_reader):
     whois = get_who(source_ip_str)
     if not whois:
         whois = "Unknown"
+
+    print(f"\nHost Name:       {hostname}")
+    print(f"\nLocation Name:   {location}")
+    print(f"\nWhois Data:      {whois}")
     insert_request(source_ip_str, hostname, location, process, origin, whois)
 
 def start_sniffing():

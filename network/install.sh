@@ -7,7 +7,7 @@ mkdir -p .venvs
 python3 -m venv .venvs/MyEnv
 .venvs/MyEnv/bin/python -m pip install --upgrade pip
 #.venvs/MyEnv/bin/python -m pip install package_name > /dev/null
-.venvs/MyEnv/bin/python -m pip install scapy maxminddb tabulate ipwhois psutil
+.venvs/MyEnv/bin/python -m pip install scapy maxminddb tabulate ipwhois psutil python-whois
 source .venvs/MyEnv/bin/activate
 
 sqlite3 ./data/database.sqlite
