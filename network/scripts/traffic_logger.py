@@ -17,6 +17,15 @@ from ipwhois import IPWhois
 RAW_DB = './data/database.sqlite'
 GEO_DB = './data/GeoLite2-City.mmdb'
 
+try:
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80)) # Connect to a known external IP
+    LOCAL_IP = s.getsockname()[0]
+    s.close()
+except socket.error:
+    LOCAL_IP = '127.0.0.1' # Fallback if no external connection
+print(f"Local IP address detected: {LOCAL_IP}")
+
 processed_networks = set()
 
 @lru_cache(maxsize=128)
@@ -109,13 +118,28 @@ def process_packet(packet, geo_reader):
         # Invalid IP address string, ignore
         return
 
+    direction = ""
+    if source_ip_str == LOCAL_IP:
+        direction = "OUTBOUND"
+    else:
+        direction = "INBOUND"
+
+
     print("\nProcessing packet.................................................")
-    print(f"\nIP Address:      {source_ip}")
-    print(f"\nProcess:         {process}")
 
     # Filter standard local/multicast network traffic out using built-in methods
     if source_ip.is_loopback or source_ip.is_private or source_ip.is_multicast or source_ip.is_link_local:
         return
+
+    # Filter out anything not inbound
+    if direction == "OUTBOUND":
+        #print(f"\nSkipping OUTBOUND connection {source_ip}")
+        return
+
+    print("\nProcessing packet.................................................")
+    print(f"\nIP Address:      {source_ip}")
+    print(f"\nProcess:         {process}")
+    print(f"\nFacing:          {direction}")
 
     # Determine the network for the current IP. We assume a default subnet mask if one isn't specified.
     # A /24 for IPv4 and /64 for IPv6 are reasonable defaults for identifying unique local networks.
