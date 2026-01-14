@@ -12,7 +12,6 @@ from scapy.all import sniff
 from scapy.all import IP, IPv6
 from functools import lru_cache
 from ipwhois import IPWhois
-import whois
 
 # Database setup
 RAW_DB = './data/database.sqlite'
@@ -33,8 +32,6 @@ def get_who(ip):
         obj = IPWhois(str(ip))
         results = obj.lookup_rdap(depth=1) # depth controls the level of detail
         return results["asn_description"]
-    except whois.parser.PywhoisError as e:
-        print(f"Error performing WHOIS lookup for {ip}: {e}\n")
     except Exception as e:
         print(f"An unexpected error occurred for {ip}: {e}\n")
 
