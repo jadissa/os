@@ -5,7 +5,7 @@ if [[ -z "$1" ]]; then
 	exit
 fi
 
-sh ~/Server/os/brew-update.sh
+sh ~/Server/os/brew/brew-update.sh
 brew install ffmpeg imagemagick
 
 # convert is part of imagemagick and translates the image to gif
@@ -21,9 +21,17 @@ brew install ffmpeg imagemagick
 
 # -r 10: Sets the frame rate for extraction to 10 frames per second. Adjust this value to control the speed and smoothness of the resulting GIF.
 
-for FILE in $(ls $1/*.m4s); do
-	ffmpeg -i $FILE -r 10 -f image2pipe -vcodec ppm - | convert -delay 10 -loop 0 -layers Optimize - $FILE.gif
-	if [[ $?==0 ]]; then
-		rm $FILE
-	fi
+for FILE in "$1"/*.m4s; do
+    # Generate a custom color palette for this specific video
+    ffmpeg -i "$FILE" -vf "fps=10,palettegen" -y /tmp/palette.png
+    
+    # Use the palette to convert to GIF with high-quality scaling
+    ffmpeg -i "$FILE" -i /tmp/palette.png -filter_complex "fps=10,paletteuse=dither=sierra2_4a" "$FILE.gif"
+    
+    # Check if the last command succeeded before deleting the source
+    if [[ $? -eq 0 ]]; then
+        rm "$FILE"
+    fi
 done
+
+#brew remove ffmpeg imagemagick

@@ -10,3 +10,5 @@ brew update --verbose
 
 # Automatically upgrade your installed formulae. If the Caskroom exists locally Casks will be upgraded as well. Must be passed with start
 brew upgrade --verbose
+
+brew cleanup --verbose
