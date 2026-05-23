@@ -89,7 +89,7 @@ zsh_config(){
 		echo "LWHITE=$LWHITE" >>$ZSHRC
 		echo "WHITE=$WHITE" >>$ZSHRC
 
-		echo "print -P '%F{$LPINK}________                              .____                    .___%f'" >>$ZSHRC
+		echo "print -P '%F{$LPINK}._______                              .____                    .___%f'" >>$ZSHRC
 		echo "print -P '%F{$PINK}\\\______ \\\_______  ____ _____    _____ |    |    ____  __ __  __| _/%f'" >>$ZSHRC
 		echo "print -P '%F{$PINK} |    |  \\\_  __ _/ __ .\\\__  \\\  /     \\\|    |   /  _ \\\|  |  \\\/ __ | %f'" >>$ZSHRC
 		echo "print -P '%F{$LPURPLE} |    .   |  | .\\\  ___/ / __ \\\|  Y Y  |    |__(   O  |  |  / /_/ | %f'" >>$ZSHRC
