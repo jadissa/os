@@ -1,1 +1,0 @@
-.venvs/MyEnv/bin/python ./scripts/whodis.py
