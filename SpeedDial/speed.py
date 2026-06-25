@@ -2,7 +2,9 @@
 import speedtest
 import json
 import time
-import sys # Import the sys module
+import sys
+import subprocess
+import re
 
 def get_internet_speed():
     """
@@ -14,7 +16,12 @@ def get_internet_speed():
         
         download_speed_raw = st.download()  # Bytes per second
         upload_speed_raw = st.upload()      # Bytes per second
-        ping = st.results.ping              # Milliseconds
+        
+        output = subprocess.check_output(["ping", "-c", "3", "-t", "1", "google.com"]).decode("utf-8")
+        match = re.search(r"round-trip min/avg/max/stddev = ([\d\.]+)/([\d\.]+)/", output)
+
+        if match:
+            avg_ping = match.group(2)
 
         # Convert to Mbps (Megabits per second)
         download_speed_mbps = download_speed_raw / 1_000_000
@@ -23,7 +30,7 @@ def get_internet_speed():
         speed_data = {
             "download_speed_mbps": round(download_speed_mbps, 2),
             "upload_speed_mbps": round(upload_speed_mbps, 2),
-            "ping_ms": round(ping, 2),
+            "ping_ms": avg_ping,
             "time_stamp": time.time(),
         }
         return speed_data
