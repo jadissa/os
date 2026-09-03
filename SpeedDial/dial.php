@@ -31,8 +31,8 @@ $dial_radius = 50;
 $center_y = 100;
 $font_size = 28;
 $font_fg_color = '#ffffff';
-$font_bg_color = '#976afb';
-$font_shadow_size = 1;
+$font_bg_color = '#000000';
+$font_shadow_size = 2;
 $dial_spacing = 20;
 
 $font_size_label = $font_size;
