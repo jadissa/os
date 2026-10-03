@@ -149,7 +149,7 @@ defaults write com.apple.dock orientation -string "left" && killall Dock
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Show hard disks on desktop
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop -bool false
 
 # Show external disks on desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
